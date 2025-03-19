@@ -10,6 +10,10 @@ import {
   Validators,
 } from '@angular/forms';
 import { SWALMIXIN } from '../../../shared/mixin/mixin-service';
+import { LoginData } from '../auth.interface';
+import { CookieService } from 'ngx-cookie-service';
+import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-login',
   imports: [CustomInputComponent, ReactiveFormsModule, FormsModule],
@@ -20,7 +24,7 @@ import { SWALMIXIN } from '../../../shared/mixin/mixin-service';
 })
 export class LoginComponent {
   loginForm: FormGroup;
-  constructor(public fb: FormBuilder, private authService: AuthService) {
+  constructor(public fb: FormBuilder, private authService: AuthService, private cookieService: CookieService, private router: Router) {
     this.loginForm = this.fb.nonNullable.group({
       email: this.fb.control('', [Validators.required, Validators.email]),
       password: this.fb.control('', [Validators.required]),
@@ -47,8 +51,13 @@ export class LoginComponent {
         password: this.loginForm.value.password,
       })
       .subscribe({
-        next: (resp) => {console.log("login response: ",resp)},
-        error: (err) => {console.log("login error : ",err)},
+        next: (resp: LoginData) => {
+          this.cookieService.set('authToken', resp?.token, { expires: 7 });
+          const cookie = this.cookieService.get('authToken');
+          console.log('cookie', cookie);
+          this.router.navigateByUrl('/dashobard')
+        },
+        error: (err) => { console.log("login error : ", err) },
       });
   }
 
