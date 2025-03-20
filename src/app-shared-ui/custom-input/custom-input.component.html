@@ -1,7 +1,9 @@
-<div class="space-y-2 animate-slide-in delay-200">
-  <label [for]="input_id" class="block text-sm font-medium text-gray-700">
-    {{ label_text }}
-  </label>
+<div class="animate-slide-in delay-200">
+   @if (haveLabel) {
+     <label [for]="input_id" class="block text-sm font-medium text-gray-700">
+      {{ label_text }}
+    </label>
+   } 
   <div class="relative">
     <input
       [id]="input_id"

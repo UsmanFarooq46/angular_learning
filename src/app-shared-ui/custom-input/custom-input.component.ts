@@ -21,6 +21,7 @@ export class CustomInputComponent {
   @Input() placeholder:string='';
   @Input() input_type:string='text';
   @Input() formControl!: FormControl;
+  @Input() haveLabel: boolean = true;
 
   passwordVisible:boolean=false;
   togglePasswordVisibility(){
