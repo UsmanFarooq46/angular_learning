@@ -3,7 +3,7 @@ import { DashboardLayoutComponent } from '../../../../app-shared-ui/dashboard-la
 
 @Component({
   selector: 'app-dashboard',
-  imports: [DashboardLayoutComponent],
+  imports: [],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss'
 })

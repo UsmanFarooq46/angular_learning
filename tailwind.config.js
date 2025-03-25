@@ -4,7 +4,13 @@ export default {
     "./src/**/*.{html,ts}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        primary: {
+          600: "#2563eb", // Example color (blue-600)
+        },
+      },
+    },
   },
   plugins: [],
 };
